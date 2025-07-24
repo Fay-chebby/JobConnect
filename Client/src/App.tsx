@@ -11,18 +11,22 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Unauthorized from "./components/auth/Unauthorized";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
+import MyApplications from "./pages/jobseeker/MyApplications";
 
-// Import bootstrap styles
 import "bootstrap/dist/css/bootstrap.min.css";
+import BrowseJobs from "./pages/jobseeker/BrowseJobs";
+import PostJob from "./pages/employer/PostJob";
+import JobApplications from "./pages/employer/JobApplications";
+import MyPostedJobs from "./pages/employer/MyPostedJobs";
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <BrowserRouter>
+  <BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
           <Routes>
             {/* Public Routes */}
             <Route path="/" element={<Index />} />
@@ -38,22 +42,19 @@ const App = () => (
 
             {/* Protected Routes - Job Seeker Only */}
             <Route element={<ProtectedRoute requiredRole="jobSeeker" />}>
-              <Route
-                path="/applications"
-                element={<div>My Applications</div>}
-              />
-              <Route path="/jobs" element={<div>Browse Jobs</div>} />
+              <Route path="/applications" element={<MyApplications />} />
+              <Route path="/jobs" element={<BrowseJobs />} />
               <Route path="/jobs/:id" element={<div>Job Details</div>} />
             </Route>
 
             {/* Protected Routes - Employer Only */}
             <Route element={<ProtectedRoute requiredRole="employer" />}>
-              <Route path="/manage-jobs" element={<div>Manage Jobs</div>} />
-              <Route path="/post-job" element={<div>Post a New Job</div>} />
+              <Route path="/manage-jobs" element={<MyPostedJobs />} />
+              <Route path="/post-job" element={<PostJob />} />
               <Route path="/jobs/:id/edit" element={<div>Edit Job</div>} />
               <Route
                 path="/jobs/:id/applications"
-                element={<div>View Job Applications</div>}
+                element={<JobApplications />}
               />
               <Route
                 path="/applications/received"
@@ -64,10 +65,10 @@ const App = () => (
             {/* 404 - Not Found */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </AuthProvider>
-  </QueryClientProvider>
+        </TooltipProvider>
+      </AuthProvider>
+    </QueryClientProvider>
+  </BrowserRouter>
 );
 
 export default App;

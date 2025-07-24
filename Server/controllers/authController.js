@@ -68,6 +68,7 @@ exports.register = asyncHandler(async (req, res) => {
   res.status(201).json({
     success: true,
     token,
+    user,
   });
 });
 
@@ -103,6 +104,7 @@ exports.login = asyncHandler(async (req, res) => {
   res.status(200).json({
     success: true,
     token,
+    user,
   });
 });
 

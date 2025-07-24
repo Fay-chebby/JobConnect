@@ -27,7 +27,12 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // Enable CORS
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173", // your Vite frontend
+    credentials: true, // allow cookies/auth headers
+  })
+);
 
 // Set security headers
 app.use((req, res, next) => {

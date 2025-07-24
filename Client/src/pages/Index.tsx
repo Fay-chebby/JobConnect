@@ -50,12 +50,12 @@ const Index: React.FC = () => {
               </div>
             </Col>
             <Col lg={6} className="mt-5 mt-lg-0 text-center">
-              <img
+              {/* <img
                 src="https://via.placeholder.com/600x400"
                 alt="Job Search"
                 className="img-fluid rounded"
                 style={{ maxHeight: "400px" }}
-              />
+              /> */}
             </Col>
           </Row>
         </Container>

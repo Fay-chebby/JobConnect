@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Container, Row, Col, Card, Button, Badge } from "react-bootstrap";
-import axios from "axios";
+import API from "@/api";
 import { Link } from "react-router-dom";
 import { Job, Application, JobSeekerStats, EmployerStats } from "@/types";
 
@@ -29,10 +29,10 @@ const Dashboard = () => {
         if (user.role === "jobSeeker") {
           // Fetch recommended jobs and job applications for job seekers
           const [jobsResponse, applicationsResponse] = await Promise.all([
-            axios.get(`${API_URL}/jobs?limit=5`, {
+            API.get(`${API_URL}/jobs?limit=5`, {
               headers: { Authorization: `Bearer ${token}` },
             }),
-            axios.get(`${API_URL}/applications`, {
+            API.get(`${API_URL}/applications`, {
               headers: { Authorization: `Bearer ${token}` },
             }),
           ]);
@@ -56,10 +56,10 @@ const Dashboard = () => {
           // Fetch posted jobs and received applications for employers
           const [postedJobsResponse, recentApplicationsResponse] =
             await Promise.all([
-              axios.get(`${API_URL}/jobs?employer=${user.id}`, {
+              API.get(`${API_URL}/jobs?employer=${user.id}`, {
                 headers: { Authorization: `Bearer ${token}` },
               }),
-              axios.get(`${API_URL}/applications/received`, {
+              API.get(`${API_URL}/applications/received`, {
                 headers: { Authorization: `Bearer ${token}` },
               }),
             ]);

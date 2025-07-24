@@ -1,4 +1,3 @@
-
 technology stack
 This project is built with:
 
@@ -38,3 +37,7 @@ pnpm run dev
 To build
 
 pnpm run build
+// DEPLOY ON RENDER
+https://jobconnect-4.onrender.com
+// vercel
+https://vercel.com/fay-chebbys-projects/job-connect

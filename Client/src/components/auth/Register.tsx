@@ -50,13 +50,13 @@ const Register = () => {
     }
 
     try {
-      await register(dataToSend);
+      const res = await register(dataToSend);
+      console.log("Registration response:", res);
       toast.success("Registration successful!");
       navigate("/dashboard");
     } catch (err: any) {
+      console.error("Registration error:", err);
       toast.error(err?.response?.data?.message || "Registration failed");
-    } finally {
-      setLoading(false);
     }
   };
 
